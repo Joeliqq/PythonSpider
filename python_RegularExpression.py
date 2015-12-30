@@ -1,20 +1,17 @@
 # coding:utf-8
 
-#------------------------
+#  ------------------------
 #
-# python 正则表达式
+#   python 正则表达式
 #
-#------------------------
+#  ------------------------
 
 import re
 
-# 将正则表达式编译成Pattern对象
-pattern = re.compile(r'hello')
+pattern = re.compile(r'hello')  # 将正则表达式编译成Pattern对象
 
-# 使用Pattern匹配文本，得到匹配结果，无结果返回None
-match = pattern.match('hello python ')
+match = pattern.match('hello python ')    # 使用Pattern匹配文本，得到匹配结果，无结果返回None
 
 if match:
-    # 使用match或得分组信息
-    print match.group()
+    print match.group()  # 使用match或得分组信息
 
