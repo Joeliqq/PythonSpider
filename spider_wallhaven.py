@@ -2,7 +2,6 @@
 
 import urllib2
 import re
-import urllib
 import os
 
 # 参考 http://lyeec.me/blog/crawler/#%E6%9C%80%E7%BB%88%E7%89%88%E6%9C%AC
@@ -33,13 +32,13 @@ def getImgURL(imgid):
 def run():
     results = []
     url = "http://alpha.wallhaven.cc/random"
-    pageNum = int(raw_input('how many pages would you want (25 pictures in one page) : '))
+    pageNum = int(raw_input('how many pages would you want (24 pictures in one page) : '))
 
     #  get the id of the pictures
     while pageNum > 0:
         pageNum -= 1
         print 'Writing Random Page...'
-        results += getImgList(getHtml(url))
+        results += getImgList(getHtml(url))     #   没有翻页的操作，重复随机覆盖
 
     results = list(set(results))
 
@@ -47,9 +46,11 @@ def run():
     file = open('url.txt', 'w')
     for imgid in results:
         file.write(getImgURL(imgid) + '\n')
-        saveImg(getImgURL(getHtml(url)), str(imgid))
     file.close()
 
+    #  use wget download the pic by url.txt
+    command = 'wget -P ./wallhaven -c -i url.txt'
+    os.system(command)
 
 if __name__ == '__main__':
     run()
