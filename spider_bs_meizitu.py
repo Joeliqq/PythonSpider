@@ -45,6 +45,7 @@ def get_menu(url):
     menu_list = soup.find_all('a', target = '_blank')
     for i in menu_list:
         result = i.find_all('img', class_ = 'lazy')
+        print
         if result:
             name = result[0]['alt'] #  标题
             address = i['href']  #　地址
