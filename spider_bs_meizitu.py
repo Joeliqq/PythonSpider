@@ -34,17 +34,19 @@ def get_pages(url):
     nums = soup.find_all('a', class_='page-numbers') #  beautifusoup 匹配
     print 'sssssssssssssss'
     print nums
-    pages = int(nums[-2].text)
+    pages = int(nums[-2].text)      #  倒数第二个元素。
 #    print  'numbers of the pages  ' + pages
     return pages
 
 def get_menu(url):
     '主题名称与地址存入列表'
     soup = get_soup(url)
+
     menu = []
     menu_list = soup.find_all('a', target = '_blank')
     for i in menu_list:
         result = i.find_all('img', class_ = 'lazy')
+
         print
         if result:
             name = result[0]['alt'] #  标题
@@ -52,30 +54,31 @@ def get_menu(url):
             menu.append([name, address])
     return menu
 
-def get_links(url):
+
+def get_links(url):   #　　分页的ＵＲＬ
     '单个主题多少张图'
     soup = get_soup(url)
-    all_ = soup.find_all('a')
+    all_ = soup.find_all('a')  #  所有的页面。
     nums = []
     for i in all_:
         span = i.find_all('span')
         if span:
-            nums.append(span[0].text)
+            nums.append(span[0].text)  #  很多。
 #    print '单个主题多少张图 ' + nums[-2]
     return  nums[-2]
 
-def get_image(url, filename):
+def get_image(url, filename):  #  每个分主题的分页的。
     '单独页面下载图片并保存 '
     soup = get_soup(url)
     image = soup.find_all('p')[0].find_all('img')[0]['src']
-    urllib.urlretrieve(image, filename)
+    urllib.urlretrieve(image, filename)  #  存储。
 
 def main(url, page):
     '下载相应页数的妹子图'
     print u'正在下载第 %d 页' % page
     page_url = url + '/page/'+str(page)
     menu = get_menu(page_url)
-    print u'@@@@@@@@@@@@@@@@第 %d 页共有 %d 个主题@@@@@@@@@@@@@@@@' %(page,len(menu))
+    print u'@@@@@@@@@@@@@@@@第 %d 页共有 %d 个主题@@@@@@@@@@@@@@@@' %(page,len(menu))  #  每页有多少个主题。
 
     for i in menu:
         dir_name=os.path.join('MeiZiTu',i[0])
