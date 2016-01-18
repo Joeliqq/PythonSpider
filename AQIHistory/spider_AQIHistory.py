@@ -3,7 +3,8 @@ __author__ = 'L'
 
 # ----------------------------
 #
-#
+# 得到该地区每月空气质量的月份和对应的URL地址，
+# 存入列表
 #
 #
 # --------------------------------
@@ -32,8 +33,8 @@ def getPerMonthURL(URL):
 
     urllist = soup.find_all('a', title = re.compile("201.+"))  # 这个位置也可以使用正则表达式。
     for i in urllist:
-        print i['title']
-        print "http://www.tianqihoubao.com" + i['href']
+        # print i['title']
+        # print "http://www.tianqihoubao.com" + i['href']
         monthname = i['title']
         monthurl = "http://www.tianqihoubao.com" + i['href']
         monthlist.append([monthname, monthurl])
